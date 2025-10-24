@@ -3,6 +3,7 @@ import os
 
 from dotenv import load_dotenv
 from sqlalchemy import URL, Engine, create_engine
+from sqlalchemy.schema import CreateSchema
 from functools import cached_property
 
 load_dotenv()
@@ -14,6 +15,8 @@ PG_PORT = os.getenv('PG_PORT')
 PG_DB = os.getenv('PG_DB')
 
 class Postgres:
+    """Classe de interação com banco de dados (mini ORM)
+    """
     def __init__(self, user: str = PG_USER, password: str = PG_PASS, host: str = PG_HOST, port: int | str = PG_PORT, db: str = PG_DB):
         self._pg_url = URL.create(
             "postgresql+psycopg2",
@@ -26,8 +29,12 @@ class Postgres:
         
     @cached_property
     def engine(self) -> Engine:
-        return create_engine(self._pg_url)
+        return create_engine(self._pg_url.render_as_string(False))
     
+    def create_schema(self, schema_name: str):
+        with self.engine.connect() as conn:
+            conn.execute(CreateSchema(schema_name, True))
+            conn.commit()
 
 if __name__ == '__main__':
     pg = Postgres()
