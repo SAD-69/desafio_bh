@@ -1,8 +1,4 @@
-from models import os
-from geopandas import GeoDataFrame
-from pandas import DataFrame, read_csv
-from functools import cached_property
-
+from models import *
 
 ORIGINAL_EPSG = 31983
 WGS_EPSG = 4326
@@ -26,5 +22,5 @@ class Transformer:
     def gdf(self) -> GeoDataFrame:
         return GeoDataFrame(self.df, geometry=self._geom_col, crs=self._crs).to_crs(ORIGINAL_EPSG)
     
-    def save_geojson(self, filename: str) -> None:
+    def save_as_geojson(self, filename: str) -> None:
         return self.gdf.to_file(os.path.join(self._geo_path, filename + '.geojson'))

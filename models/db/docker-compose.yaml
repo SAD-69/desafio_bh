@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgis/postgis:latest
+    container_name: bh-place
+    restart: always
+    environment:
+      POSTGRES_USER: place_admin
+      POSTGRES_PASSWORD: place123
+      POSTGRES_DB: bh-gis
+    ports:
+      - "5432:5432"

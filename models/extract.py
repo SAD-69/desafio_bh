@@ -1,5 +1,5 @@
-import requests as req
-import pandas as pd 
+import requests
+from models import DataFrame, read_csv
 
 class Extractor:
     def __init__(self):

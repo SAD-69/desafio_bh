@@ -1,0 +1,17 @@
+[project]
+name = "desafio-bh"
+version = "0.1.0"
+description = "Desafio técnico Place - Engenharia de Dados"
+authors = [
+    {name = "Vicente Trindade",email = "vicentesim@gmail.com"}
+]
+license = {text = "GPL-3.0"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
